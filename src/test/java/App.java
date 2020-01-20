@@ -1,4 +1,4 @@
-import com.rsmaxwell.diary.json.Version;
+import com.rsmaxwell.diaryjson.Version;
 
 public class App {
 

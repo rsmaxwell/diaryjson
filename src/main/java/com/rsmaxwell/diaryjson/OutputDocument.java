@@ -1,9 +1,9 @@
-package com.rsmaxwell.diary.json;
+package com.rsmaxwell.diaryjson;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.rsmaxwell.diary.json.OutputDay;
+import com.rsmaxwell.diaryjson.OutputDay;
 
 public class OutputDocument {
 

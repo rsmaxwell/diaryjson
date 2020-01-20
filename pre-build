@@ -34,4 +34,13 @@ done
 #*****************************************************************
 # Update the version in the pom file
 #*****************************************************************
-mvn versions:set -DnewVersion=${VERSION}
+mvn --batch-mode --log-file output.txt versions:set -DnewVersion=${VERSION}
+result=$?
+if [ ! ${result} == 0 ]; then
+    echo "Error: $0[${LINENO}]"
+    echo "result: ${result}"
+    echo "----[ output.txt ]--------------------------"
+    cat output.txt
+    echo "----------------------------------------"
+    exit 1
+fi

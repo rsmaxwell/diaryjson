@@ -1,4 +1,4 @@
-package com.rsmaxwell.diary.json;
+package com.rsmaxwell.diaryjson;
 
 public class Version {
 

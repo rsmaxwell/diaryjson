@@ -1,4 +1,4 @@
-package com.rsmaxwell.diary.json;
+package com.rsmaxwell.diaryjson;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
