@@ -46,7 +46,8 @@ public class Day {
 
 		if (dayOfWeek1 != dayOfWeek2) {
 			throw new Exception("Inconsistent day-of-week: " + year + "-" + month + "-" + day + " --> day-of-week: "
-					+ dayOfWeek1 + " / " + dayOfWeek2);
+					+ "actual: " + dayOfWeek1 + " : " + daynames[dayOfWeek1] + ", expected: " + dayOfWeek2 + " : "
+					+ daynames[dayOfWeek2]);
 		}
 
 	}
