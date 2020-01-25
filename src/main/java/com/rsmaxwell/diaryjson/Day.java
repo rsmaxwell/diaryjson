@@ -37,6 +37,10 @@ public class Day {
 		throw new Exception("Invalid day name: '" + string + "'");
 	}
 
+	public static String toString(int index) throws Exception {
+		return daynames[index - 1];
+	}
+
 	public static void check(int year, int month, int day, int dayOfWeek1) throws Exception {
 
 		LocalDate localDate = LocalDate.of(year, month, day);
@@ -45,9 +49,10 @@ public class Day {
 		int dayOfWeek2 = dayOfWeek.getValue();
 
 		if (dayOfWeek1 != dayOfWeek2) {
-			throw new Exception("Inconsistent day-of-week: " + year + "-" + month + "-" + day + " --> day-of-week: "
-					+ "actual: " + dayOfWeek1 + " : " + daynames[dayOfWeek1] + ", expected: " + dayOfWeek2 + " : "
-					+ daynames[dayOfWeek2]);
+			String message = "Inconsistent day-of-week: " + year + "-" + month + "-" + day + " --> day-of-week: "
+					+ "actual: " + dayOfWeek1 + " (" + toString(dayOfWeek1) + "), expected: " + dayOfWeek2 + " ("
+					+ toString(dayOfWeek2) + ")";
+			throw new Exception(message);
 		}
 
 	}
