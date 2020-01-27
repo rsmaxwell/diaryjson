@@ -12,9 +12,6 @@ public class OutputDay implements Comparable {
 	public String line;
 
 	@JsonInclude(Include.NON_EMPTY)
-	public int continuation;
-
-	@JsonInclude(Include.NON_EMPTY)
 	public String notes;
 
 	@Override
