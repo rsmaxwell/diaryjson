@@ -9,7 +9,7 @@ public class OutputDay implements Comparable {
 	public int month;
 	public int day;
 	public String page;
-	public String line;
+	public String html;
 
 	@JsonInclude(Include.NON_EMPTY)
 	public String notes;
