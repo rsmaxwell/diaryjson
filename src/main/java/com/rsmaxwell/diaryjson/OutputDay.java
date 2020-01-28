@@ -27,7 +27,7 @@ public class OutputDay implements Comparable {
 		if (day != other.day) {
 			return day - other.day;
 		}
-		if (!order.equals(other.day)) {
+		if (!order.equals(other.order)) {
 			return order.compareTo(other.order);
 		}
 		return reference.compareTo(other.reference);
