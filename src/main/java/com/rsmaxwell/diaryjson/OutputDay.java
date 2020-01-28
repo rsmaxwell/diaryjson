@@ -33,4 +33,17 @@ public class OutputDay implements Comparable {
 		return reference.compareTo(other.reference);
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{ \"year\" :" + year);
+		sb.append(", \"month\" : " + month);
+		sb.append(", \"day\" : " + day);
+		sb.append(", \"order\" : " + order);
+		sb.append(", \"reference\" : " + reference);
+		sb.append(" }");
+
+		return sb.toString();
+	}
 }
