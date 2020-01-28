@@ -8,7 +8,8 @@ public class OutputDay implements Comparable {
 	public int year;
 	public int month;
 	public int day;
-	public String page;
+	public String order;
+	public String reference;
 	public String html;
 
 	@JsonInclude(Include.NON_EMPTY)
@@ -26,7 +27,7 @@ public class OutputDay implements Comparable {
 		if (day != other.day) {
 			return day - other.day;
 		}
-		return page.compareTo(other.page);
+		return order.compareTo(other.order);
 	}
 
 }
