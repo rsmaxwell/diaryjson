@@ -13,4 +13,8 @@ public class Month {
 		}
 		throw new Exception("Unexpected month: " + text);
 	}
+
+	public static String toString(int index) throws Exception {
+		return months[index - 1];
+	}
 }
