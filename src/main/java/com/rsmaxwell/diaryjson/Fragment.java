@@ -3,7 +3,7 @@ package com.rsmaxwell.diaryjson;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-public class OutputDay implements Comparable {
+public class Fragment implements Comparable {
 
 	public int year;
 	public int month;
@@ -17,7 +17,7 @@ public class OutputDay implements Comparable {
 
 	@Override
 	public int compareTo(Object o) {
-		OutputDay other = (OutputDay) o;
+		Fragment other = (Fragment) o;
 		if (year != other.year) {
 			return year - other.year;
 		}

@@ -3,9 +3,9 @@ package com.rsmaxwell.diaryjson;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.rsmaxwell.diaryjson.OutputDay;
+import com.rsmaxwell.diaryjson.Fragment;
 
 public class OutputDocument {
 
-	public List<OutputDay> days = new ArrayList<OutputDay>();
+	public List<Fragment> days = new ArrayList<Fragment>();
 }
