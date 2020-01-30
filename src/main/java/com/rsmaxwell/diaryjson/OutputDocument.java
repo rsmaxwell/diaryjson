@@ -7,5 +7,5 @@ import com.rsmaxwell.diaryjson.Fragment;
 
 public class OutputDocument {
 
-	public List<Fragment> days = new ArrayList<Fragment>();
+	public List<Fragment> fragments = new ArrayList<Fragment>();
 }
