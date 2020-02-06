@@ -49,9 +49,8 @@ public class Day {
 		int dayOfWeek2 = dayOfWeek.getValue();
 
 		if (dayOfWeek1 != dayOfWeek2) {
-			String message = "Inconsistent day-of-week: " + year + "-" + month + "-" + day + " --> day-of-week: "
-					+ "actual: " + dayOfWeek1 + " (" + toString(dayOfWeek1) + "), expected: " + dayOfWeek2 + " ("
-					+ toString(dayOfWeek2) + ")";
+			String message = "Inconsistent day-of-week: " + year + "-" + month + "-" + day + " --> day-of-week: " + "actual: " + dayOfWeek1 + " ("
+					+ toString(dayOfWeek1) + "), expected: " + dayOfWeek2 + " (" + toString(dayOfWeek2) + ")";
 			throw new Exception(message);
 		}
 

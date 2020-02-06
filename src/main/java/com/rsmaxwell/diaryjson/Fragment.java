@@ -1,19 +1,37 @@
 package com.rsmaxwell.diaryjson;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-public class Fragment implements Comparable {
+public class Fragment implements Comparable, Cloneable {
 
 	public int year;
 	public int month;
 	public int day;
 	public String order;
-	public String reference;
+
+	@JsonInclude(Include.NON_NULL)
+	public String type;
+
+	@JsonIgnore
+	public boolean template;
+
+	@JsonIgnore
 	public String html;
 
-	@JsonInclude(Include.NON_EMPTY)
+	@JsonIgnore
 	public String notes;
+
+	public Fragment() {
+	}
+
+	public Fragment(int year, int month, int day, String order) {
+		this.year = year;
+		this.month = month;
+		this.day = day;
+		this.order = order;
+	}
 
 	@Override
 	public int compareTo(Object o) {
@@ -27,23 +45,16 @@ public class Fragment implements Comparable {
 		if (day != other.day) {
 			return day - other.day;
 		}
-		if (!order.equals(other.order)) {
-			return order.compareTo(other.order);
-		}
-		return reference.compareTo(other.reference);
+		return order.compareTo(other.order);
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		return String.format("%04d-%02d-%02d-%s", year, month, day, order);
+	}
 
-		sb.append("{ \"year\" :" + year);
-		sb.append(", \"month\" : " + month);
-		sb.append(", \"day\" : " + day);
-		sb.append(", \"order\" : " + order);
-		sb.append(", \"reference\" : " + reference);
-		sb.append(" }");
-
-		return sb.toString();
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 }
