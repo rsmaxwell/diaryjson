@@ -15,8 +15,11 @@ public class DayOfFragments implements Comparable {
 		this.day = day;
 	}
 
-	public void add(Fragment fragment) {
-		fragments.add(fragment);
+	public void add(Fragment fragment) throws Exception {
+		boolean result = fragments.add(fragment);
+		if (!result) {
+			throw new Exception("duplicate fragment: " + fragment);
+		}
 	}
 
 	public int size() {
