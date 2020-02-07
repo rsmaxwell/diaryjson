@@ -52,6 +52,7 @@ public class Template {
 
 	public String process() throws Exception {
 
+		map.put("@@BUILD_YEAR@@", getenv("BUILD_YEAR", "snapshot"));
 		map.put("@@BUILD_ID@@", getenv("BUILD_ID", "snapshot"));
 		map.put("@@BUILD_DATE@@", getenv("BUILD_DATE", "snapshot"));
 		map.put("@@GIT_COMMIT@@", getenv("GIT_COMMIT", "snapshot"));
