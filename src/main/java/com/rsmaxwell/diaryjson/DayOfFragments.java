@@ -38,24 +38,48 @@ public class DayOfFragments implements Comparable {
 		return (day - other.day);
 	}
 
-	public boolean hasDocumentHeader() {
-		return hasType("document-header");
+	public boolean hasDocumentHeader_1() {
+		return hasType("document-header-1");
+	}
+
+	public boolean hasDocumentHeader_2() {
+		return hasType("document-header-2");
+	}
+
+	public boolean hasDocumentForward() {
+		return hasType("document-forward");
 	}
 
 	public boolean hasDocumentFooter() {
 		return hasType("document-footer");
 	}
 
-	public boolean hasYearHeader() {
-		return hasType("year-header");
+	public boolean hasYearHeader_1() {
+		return hasType("year-header-1");
+	}
+
+	public boolean hasYearHeader_2() {
+		return hasType("year-header-2");
+	}
+
+	public boolean hasYearFooter() {
+		return hasType("year-footer");
 	}
 
 	public boolean hasMonthHeader() {
 		return hasType("month-header");
 	}
 
+	public boolean hasMonthFooter() {
+		return hasType("month-footer");
+	}
+
 	public boolean hasDayHeader() {
 		return hasType("day-header");
+	}
+
+	public boolean hasDayFooter() {
+		return hasType("day-footer");
 	}
 
 	private boolean hasType(String type) {
