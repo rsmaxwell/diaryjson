@@ -66,8 +66,12 @@ public class DayOfFragments implements Comparable {
 		return hasType("year-footer");
 	}
 
-	public boolean hasMonthHeader() {
-		return hasType("month-header");
+	public boolean hasMonthHeader_1() {
+		return hasType("month-header-1");
+	}
+
+	public boolean hasMonthHeader_2() {
+		return hasType("month-header-2");
 	}
 
 	public boolean hasMonthFooter() {
