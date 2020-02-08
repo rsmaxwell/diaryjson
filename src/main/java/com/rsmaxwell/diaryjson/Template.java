@@ -1,8 +1,6 @@
 package com.rsmaxwell.diaryjson;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -10,47 +8,28 @@ import java.util.Map;
 
 public class Template {
 
-	private String template;
-	private Map<String, String> map = new HashMap<String, String>();
+	private File templateDir;
 
-	public static String getString(String text) throws Exception {
-		Template t = new Template(text);
-		return t.process();
+	public Template(File dir) {
+		templateDir = dir;
 	}
 
-	public static String getString(File file) throws Exception {
-		Template t = new Template(file);
-		return t.process();
+	public Fragment get(DayOfFragments day, String template) throws Exception {
+		return get(templateDir, day, template);
 	}
 
-	public static String getString(File file, DayOfFragments day) throws Exception {
-		Template t = new Template(file);
-		return t.process(day);
-	}
-
-	public Template(String text) throws IOException {
-		template = text;
-	}
-
-	public Template(File file) throws IOException {
-		template = new String(Files.readAllBytes(file.toPath()));
-	}
-
-	public String process(DayOfFragments day) throws Exception {
+	private Fragment get(File templateDir, DayOfFragments day, String template) throws Exception {
 
 		LocalDate localDate = LocalDate.of(day.year, day.month, day.day);
 		DayOfWeek dayOfWeek = DayOfWeek.from(localDate);
+
+		Map<String, String> map = new HashMap<String, String>();
 
 		map.put("@@YEAR@@", Integer.toString(day.year));
 		map.put("@@MONTH@@", Integer.toString(day.month));
 		map.put("@@MONTH_NAME@@", Month.toString(day.month));
 		map.put("@@DAY@@", Integer.toString(day.day));
 		map.put("@@DAY_NAME@@", Day.toString(dayOfWeek.getValue()));
-
-		return process();
-	}
-
-	public String process() throws Exception {
 
 		map.put("@@BUILD_YEAR@@", getenv("BUILD_YEAR", "snapshot"));
 		map.put("@@BUILD_ID@@", getenv("BUILD_ID", "snapshot"));
@@ -59,12 +38,17 @@ public class Template {
 		map.put("@@GIT_BRANCH@@", getenv("GIT_BRANCH", "snapshot"));
 		map.put("@@GIT_URL@@", getenv("GIT_URL", "snapshot"));
 
-		String string = template;
+		Fragment fragment = Fragment.MakeFragment(new File(templateDir, template));
+		fragment.year = day.year;
+		fragment.month = day.month;
+		fragment.day = day.day;
+
+		String string = fragment.html;
 		for (String tag : map.keySet()) {
 			string = string.replaceAll(tag, map.get(tag));
 		}
-
-		return string;
+		fragment.html = string;
+		return fragment;
 	}
 
 	private String getenv(String key, String fallback) {

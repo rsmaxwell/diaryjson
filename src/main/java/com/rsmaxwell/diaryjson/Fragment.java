@@ -1,8 +1,15 @@
 package com.rsmaxwell.diaryjson;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Fragment implements Comparable, Cloneable {
 
@@ -15,15 +22,25 @@ public class Fragment implements Comparable, Cloneable {
 	public String type;
 
 	@JsonIgnore
-	public boolean template;
-
-	@JsonIgnore
 	public String html;
 
 	@JsonIgnore
 	public String notes;
 
+	@JsonIgnore
+	private static ObjectMapper objectMapper;
+
+	static {
+		objectMapper = new ObjectMapper();
+	}
+
 	public Fragment() {
+	}
+
+	public static Fragment MakeFragment(File dir) throws JsonParseException, JsonMappingException, IOException {
+		Fragment fragment = objectMapper.readValue(new File(dir, "fragment.json"), Fragment.class);
+		fragment.html = new String(Files.readAllBytes(new File(dir, "fragment.html").toPath()));
+		return fragment;
 	}
 
 	public Fragment(int year, int month, int day, String order) {
