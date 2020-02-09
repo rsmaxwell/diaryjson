@@ -45,18 +45,23 @@ public class Templates {
 	}
 
 	private Template NewTemplate(File dir) throws Exception {
-		TemplateInfo info = objectMapper.readValue(new File(dir, "template.json"), TemplateInfo.class);
+		try {
+			TemplateInfo info = objectMapper.readValue(new File(dir, "template.json"), TemplateInfo.class);
 
-		Class<?> clazz = Class.forName(info.classname);
-		Constructor<?> ctor = clazz.getConstructor(File.class);
-		Object object = ctor.newInstance(new Object[] { dir });
+			Class<?> clazz = Class.forName(info.classname);
+			Constructor<?> ctor = clazz.getConstructor(File.class);
+			Object object = ctor.newInstance(new Object[] { dir });
 
-		if (!Template.class.isInstance(object)) {
-			throw new Exception("The template [" + dir.getCanonicalPath() + "] class [" + info.classname + "] does not implement ["
-					+ Template.class.getName() + "]");
+			if (!Template.class.isInstance(object)) {
+				throw new Exception("The template [" + dir.getCanonicalPath() + "] class [" + info.classname + "] does not implement ["
+						+ Template.class.getName() + "]");
+			}
+
+			return (Template) object;
+
+		} catch (Exception e) {
+			throw new Exception(dir.getCanonicalPath(), e);
 		}
-
-		return (Template) object;
 	}
 
 	private void add(DayOfFragments previousDay, DayOfFragments day, List<Fragment> listOfNewFragments) throws Exception {
