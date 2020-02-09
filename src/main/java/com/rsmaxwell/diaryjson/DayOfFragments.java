@@ -1,5 +1,6 @@
 package com.rsmaxwell.diaryjson;
 
+import java.util.Iterator;
 import java.util.TreeSet;
 
 public class DayOfFragments implements Comparable {
@@ -16,7 +17,18 @@ public class DayOfFragments implements Comparable {
 	}
 
 	public void add(Fragment fragment) throws Exception {
-		fragments.add(fragment);
+		boolean ok = fragments.add(fragment);
+		if (!ok) {
+			System.out.println("Discarding fragment: " + fragment + ", source: " + fragment.source);
+
+			Iterator<Fragment> iterator = fragments.iterator();
+			while (iterator.hasNext()) {
+				Fragment f = iterator.next();
+				if (f.equals(fragment)) {
+					System.out.println("Duplicate fragment: " + f + ", source: " + f.source);
+				}
+			}
+		}
 	}
 
 	public int size() {

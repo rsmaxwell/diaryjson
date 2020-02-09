@@ -27,6 +27,8 @@ public class Fragment implements Comparable, Cloneable {
 	@JsonIgnore
 	public String notes;
 
+	public String source;
+
 	@JsonIgnore
 	private static ObjectMapper objectMapper;
 
@@ -40,6 +42,7 @@ public class Fragment implements Comparable, Cloneable {
 	public static Fragment MakeFragment(File dir) throws JsonParseException, JsonMappingException, IOException {
 		Fragment fragment = objectMapper.readValue(new File(dir, "fragment.json"), Fragment.class);
 		fragment.html = new String(Files.readAllBytes(new File(dir, "fragment.html").toPath()));
+		fragment.source = dir.getCanonicalPath();
 		return fragment;
 	}
 
