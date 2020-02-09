@@ -24,6 +24,10 @@ public class Templates {
 		for (File dir : templateDir.listFiles()) {
 			templates.add(NewTemplate(dir));
 		}
+
+		if (templates.size() == 0) {
+			throw new Exception("No templates found in: " + templateDir.getCanonicalPath());
+		}
 	}
 
 	public void addGeneratedFragments(TreeMap<Key, DayOfFragments> mapOfDays) throws Exception {
