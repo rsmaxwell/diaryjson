@@ -3,7 +3,6 @@ package com.rsmaxwell.diaryjson.template;
 import java.io.File;
 import java.util.List;
 
-import com.rsmaxwell.diaryjson.DayOfFragments;
 import com.rsmaxwell.diaryjson.Fragment;
 
 public class DayHeader extends AbstractTemplate {
@@ -13,10 +12,10 @@ public class DayHeader extends AbstractTemplate {
 	}
 
 	@Override
-	public void add(DayOfFragments previousDay, DayOfFragments day, List<Fragment> listOfNewFragments) throws Exception {
-		if (day != null) {
-			if ((previousDay == null) || (previousDay.day != day.day)) {
-				listOfNewFragments.add(get(day));
+	public void add(Fragment previousFragment, Fragment fragment, List<Fragment> listOfNewFragments) throws Exception {
+		if (fragment != null) {
+			if ((previousFragment == null) || (previousFragment.day != fragment.day)) {
+				listOfNewFragments.add(get(fragment));
 			}
 		}
 	}

@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.rsmaxwell.diaryjson.Day;
-import com.rsmaxwell.diaryjson.DayOfFragments;
 import com.rsmaxwell.diaryjson.Fragment;
 import com.rsmaxwell.diaryjson.Month;
 
@@ -19,7 +18,7 @@ public abstract class AbstractTemplate implements Template {
 		this.dir = dir;
 	}
 
-	public Fragment get(DayOfFragments day) throws Exception {
+	public Fragment get(Fragment day) throws Exception {
 
 		LocalDate localDate = LocalDate.of(day.year, day.month, day.day);
 		DayOfWeek dayOfWeek = DayOfWeek.from(localDate);

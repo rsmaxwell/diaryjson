@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,9 +15,6 @@ public class Fragment implements Comparable, Cloneable {
 	public int month;
 	public int day;
 	public String order;
-
-	@JsonInclude(Include.NON_NULL)
-	public String type;
 
 	@JsonIgnore
 	public String html;
@@ -75,7 +70,7 @@ public class Fragment implements Comparable, Cloneable {
 
 	@Override
 	public String toString() {
-		return String.format("%04d-%02d-%02d-%s", year, month, day, order);
+		return String.format("%04d-%02d-%02d-%s %s", year, month, day, order, source);
 	}
 
 	@Override

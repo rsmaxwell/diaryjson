@@ -30,21 +30,29 @@ public class Templates {
 		}
 	}
 
-	public void addGeneratedFragments(TreeMap<Key, DayOfFragments> mapOfDays) throws Exception {
-		List<Fragment> listOfNewFragments = new ArrayList<Fragment>();
-		DayOfFragments previousDay = null;
+	public void addGeneratedFragments(TreeMap<Key, Fragment> mapOfFragments) throws Exception {
 
-		for (Key key : mapOfDays.keySet()) {
-			DayOfFragments day = mapOfDays.get(key);
-			add(previousDay, day, listOfNewFragments);
-			previousDay = day;
+		List<Fragment> listOfNewFragments = new ArrayList<Fragment>();
+
+		Fragment previousFragment = null;
+		for (Key key : mapOfFragments.keySet()) {
+			Fragment fragment = mapOfFragments.get(key);
+			add(previousFragment, fragment, listOfNewFragments);
+			previousFragment = fragment;
 		}
-		add(previousDay, null, listOfNewFragments);
+		add(previousFragment, null, listOfNewFragments);
 
 		for (Fragment fragment : listOfNewFragments) {
-			Key key = new Key(fragment.year, fragment.month, fragment.day);
-			DayOfFragments day = mapOfDays.get(key);
-			day.add(fragment);
+			Key key = new Key(fragment.year, fragment.month, fragment.day, fragment.order);
+
+			Fragment original = mapOfFragments.get(key);
+			if (original != null) {
+				System.out.println("Duplicate fragment:");
+				System.out.println("    discarding: " + fragment.toString());
+				System.out.println("    keeping :   " + original.toString());
+			} else {
+				mapOfFragments.put(key, fragment);
+			}
 		}
 	}
 
@@ -68,9 +76,9 @@ public class Templates {
 		}
 	}
 
-	private void add(DayOfFragments previousDay, DayOfFragments day, List<Fragment> listOfNewFragments) throws Exception {
+	private void add(Fragment previousFragment, Fragment fragment, List<Fragment> listOfNewFragments) throws Exception {
 		for (Template template : templates) {
-			template.add(previousDay, day, listOfNewFragments);
+			template.add(previousFragment, fragment, listOfNewFragments);
 		}
 	}
 }

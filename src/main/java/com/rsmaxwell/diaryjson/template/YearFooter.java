@@ -3,7 +3,6 @@ package com.rsmaxwell.diaryjson.template;
 import java.io.File;
 import java.util.List;
 
-import com.rsmaxwell.diaryjson.DayOfFragments;
 import com.rsmaxwell.diaryjson.Fragment;
 
 public class YearFooter extends AbstractTemplate {
@@ -13,10 +12,10 @@ public class YearFooter extends AbstractTemplate {
 	}
 
 	@Override
-	public void add(DayOfFragments previousDay, DayOfFragments day, List<Fragment> listOfNewFragments) throws Exception {
-		if (previousDay != null) {
-			if ((day == null) || (previousDay.year != day.year)) {
-				listOfNewFragments.add(get(previousDay));
+	public void add(Fragment previousFragment, Fragment fragment, List<Fragment> listOfNewFragments) throws Exception {
+		if (previousFragment != null) {
+			if ((fragment == null) || (previousFragment.year != fragment.year)) {
+				listOfNewFragments.add(get(previousFragment));
 			}
 		}
 	}

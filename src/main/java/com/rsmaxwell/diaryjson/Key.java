@@ -5,11 +5,13 @@ public class Key implements Comparable {
 	public int year;
 	public int month;
 	public int day;
+	public String order;
 
-	public Key(int year, int month, int day) {
+	public Key(int year, int month, int day, String order) {
 		this.year = year;
 		this.month = month;
 		this.day = day;
+		this.order = order;
 	}
 
 	@Override
@@ -21,6 +23,9 @@ public class Key implements Comparable {
 		if (month != other.month) {
 			return month - other.month;
 		}
-		return day - other.day;
+		if (day != other.day) {
+			return day - other.day;
+		}
+		return order.compareTo(other.order);
 	}
 }
