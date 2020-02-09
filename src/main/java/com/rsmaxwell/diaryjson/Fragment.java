@@ -54,6 +54,11 @@ public class Fragment implements Comparable, Cloneable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		return (compareTo(obj) == 0);
+	}
+
+	@Override
 	public int compareTo(Object o) {
 		Fragment other = (Fragment) o;
 		if (year != other.year) {

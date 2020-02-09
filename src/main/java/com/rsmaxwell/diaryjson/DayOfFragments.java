@@ -25,9 +25,10 @@ public class DayOfFragments implements Comparable {
 			while (iterator.hasNext()) {
 				Fragment f = iterator.next();
 				if (f.equals(fragment)) {
-					System.out.println("Duplicate fragment: " + f + ", source: " + f.source);
+					System.out.println("Duplicate  fragment: " + f + ", source: " + f.source);
 				}
 			}
+			System.out.println("");
 		}
 	}
 
