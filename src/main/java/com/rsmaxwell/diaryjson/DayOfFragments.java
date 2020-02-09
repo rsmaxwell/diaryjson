@@ -16,10 +16,7 @@ public class DayOfFragments implements Comparable {
 	}
 
 	public void add(Fragment fragment) throws Exception {
-		boolean result = fragments.add(fragment);
-		if (!result) {
-			throw new Exception("duplicate fragment: " + fragment);
-		}
+		fragments.add(fragment);
 	}
 
 	public int size() {
@@ -36,62 +33,5 @@ public class DayOfFragments implements Comparable {
 			return month - other.month;
 		}
 		return (day - other.day);
-	}
-
-	public boolean hasDocumentHeader_1() {
-		return hasType("document-header-1");
-	}
-
-	public boolean hasDocumentHeader_2() {
-		return hasType("document-header-2");
-	}
-
-	public boolean hasDocumentForward() {
-		return hasType("document-forward");
-	}
-
-	public boolean hasDocumentFooter() {
-		return hasType("document-footer");
-	}
-
-	public boolean hasYearHeader_1() {
-		return hasType("year-header-1");
-	}
-
-	public boolean hasYearHeader_2() {
-		return hasType("year-header-2");
-	}
-
-	public boolean hasYearFooter() {
-		return hasType("year-footer");
-	}
-
-	public boolean hasMonthHeader_1() {
-		return hasType("month-header-1");
-	}
-
-	public boolean hasMonthHeader_2() {
-		return hasType("month-header-2");
-	}
-
-	public boolean hasMonthFooter() {
-		return hasType("month-footer");
-	}
-
-	public boolean hasDayHeader() {
-		return hasType("day-header");
-	}
-
-	public boolean hasDayFooter() {
-		return hasType("day-footer");
-	}
-
-	private boolean hasType(String type) {
-		for (Fragment fragment : fragments) {
-			if (type.equals(fragment.type)) {
-				return true;
-			}
-		}
-		return false;
 	}
 }

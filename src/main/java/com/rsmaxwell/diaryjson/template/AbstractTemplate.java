@@ -1,4 +1,4 @@
-package com.rsmaxwell.diaryjson;
+package com.rsmaxwell.diaryjson.template;
 
 import java.io.File;
 import java.time.DayOfWeek;
@@ -6,19 +6,20 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Template {
+import com.rsmaxwell.diaryjson.Day;
+import com.rsmaxwell.diaryjson.DayOfFragments;
+import com.rsmaxwell.diaryjson.Fragment;
+import com.rsmaxwell.diaryjson.Month;
 
-	private File templateDir;
+public abstract class AbstractTemplate implements Template {
 
-	public Template(File dir) {
-		templateDir = dir;
+	private File dir;
+
+	public AbstractTemplate(File dir) {
+		this.dir = dir;
 	}
 
-	public Fragment get(DayOfFragments day, String template) throws Exception {
-		return get(templateDir, day, template);
-	}
-
-	private Fragment get(File templateDir, DayOfFragments day, String template) throws Exception {
+	public Fragment get(DayOfFragments day) throws Exception {
 
 		LocalDate localDate = LocalDate.of(day.year, day.month, day.day);
 		DayOfWeek dayOfWeek = DayOfWeek.from(localDate);
@@ -38,7 +39,7 @@ public class Template {
 		map.put("@@GIT_BRANCH@@", getenv("GIT_BRANCH", "snapshot"));
 		map.put("@@GIT_URL@@", getenv("GIT_URL", "snapshot"));
 
-		Fragment fragment = Fragment.MakeFragment(new File(templateDir, template));
+		Fragment fragment = Fragment.MakeFragment(dir);
 		fragment.year = day.year;
 		fragment.month = day.month;
 		fragment.day = day.day;
@@ -58,4 +59,5 @@ public class Template {
 		}
 		return value;
 	}
+
 }
