@@ -68,7 +68,7 @@ public class Fragment implements Comparable, Cloneable {
 		return order.compareTo(other.order);
 	}
 
-	public String getDirectoryName() {
+	public String toDirectoryName() {
 		return String.format("%04d-%02d-%02d-%s", year, month, day, order);
 	}
 
