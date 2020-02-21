@@ -5,6 +5,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import com.rsmaxwell.diaryjson.Day;
 import com.rsmaxwell.diaryjson.Fragment;
@@ -14,21 +15,26 @@ public abstract class AbstractTemplate implements Template {
 
 	private File dir;
 
+	private static String sourcePatternString = "([\\d]{4})-([\\d]{2})-([\\d]{2})-(img[\\d]{4})-.*";
+	private static Pattern sourcePattern = Pattern.compile(sourcePatternString);
+
 	public AbstractTemplate(File dir) {
 		this.dir = dir;
 	}
 
-	public Fragment get(Fragment day) throws Exception {
+	public Fragment get(Fragment base) throws Exception {
 
-		LocalDate localDate = LocalDate.of(day.year, day.month, day.day);
+		LocalDate localDate = LocalDate.of(base.year, base.month, base.day);
 		DayOfWeek dayOfWeek = DayOfWeek.from(localDate);
 
 		Map<String, String> map = new HashMap<String, String>();
 
-		map.put("@@YEAR@@", Integer.toString(day.year));
-		map.put("@@MONTH@@", Integer.toString(day.month));
-		map.put("@@MONTH_NAME@@", Month.toString(day.month));
-		map.put("@@DAY@@", Integer.toString(day.day));
+		map.put("@@PAGE_LINK@@", base.imageFilename);
+
+		map.put("@@YEAR@@", Integer.toString(base.year));
+		map.put("@@MONTH@@", Integer.toString(base.month));
+		map.put("@@MONTH_NAME@@", Month.toString(base.month));
+		map.put("@@DAY@@", Integer.toString(base.day));
 		map.put("@@DAY_NAME@@", Day.toString(dayOfWeek.getValue()));
 
 		map.put("@@BUILD_YEAR@@", getenv("BUILD_YEAR", "snapshot"));
@@ -39,9 +45,9 @@ public abstract class AbstractTemplate implements Template {
 		map.put("@@GIT_URL@@", getenv("GIT_URL", "snapshot"));
 
 		Fragment fragment = Fragment.MakeFragment(dir);
-		fragment.year = day.year;
-		fragment.month = day.month;
-		fragment.day = day.day;
+		fragment.year = base.year;
+		fragment.month = base.month;
+		fragment.day = base.day;
 		fragment.check();
 
 		String string = fragment.html;
