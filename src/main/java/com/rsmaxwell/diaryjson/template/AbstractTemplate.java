@@ -51,6 +51,11 @@ public abstract class AbstractTemplate implements Template {
 		fragment.check();
 
 		String string = fragment.html;
+
+		if (string == null) {
+			throw new Exception("the html fiels is null for the fragment: " + fragment.toString());
+		}
+
 		for (String tag : map.keySet()) {
 			string = string.replaceAll(tag, map.get(tag));
 		}
