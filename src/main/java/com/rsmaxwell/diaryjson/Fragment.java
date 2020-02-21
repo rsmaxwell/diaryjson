@@ -41,11 +41,27 @@ public class Fragment implements Comparable, Cloneable {
 		return fragment;
 	}
 
-	public Fragment(int year, int month, int day, String order) {
+	public Fragment(int year, int month, int day, String order) throws Exception {
 		this.year = year;
 		this.month = month;
 		this.day = day;
 		this.order = order;
+	}
+
+	public void check() throws Exception {
+		if (year < 1828) {
+			throw new Exception("year too small: " + year);
+		} else if (year > 1839) {
+			throw new Exception("year too large: " + year);
+		} else if (month < 1) {
+			throw new Exception("month too small: " + month);
+		} else if (month > 12) {
+			throw new Exception("month too large: " + month);
+		} else if (day < 1) {
+			throw new Exception("day too small: " + day);
+		} else if (day > 31) {
+			throw new Exception("day too large: " + day);
+		}
 	}
 
 	@Override

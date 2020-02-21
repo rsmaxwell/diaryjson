@@ -42,6 +42,7 @@ public abstract class AbstractTemplate implements Template {
 		fragment.year = day.year;
 		fragment.month = day.month;
 		fragment.day = day.day;
+		fragment.check();
 
 		String string = fragment.html;
 		for (String tag : map.keySet()) {
