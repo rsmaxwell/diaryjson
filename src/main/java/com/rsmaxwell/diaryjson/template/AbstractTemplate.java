@@ -29,7 +29,9 @@ public abstract class AbstractTemplate implements Template {
 
 		Map<String, String> map = new HashMap<String, String>();
 
-		map.put("@@PAGE_LINK@@", base.imageFilename);
+		if (base.imageFilename != null) {
+			map.put("@@PAGE_LINK@@", base.imageFilename);
+		}
 
 		map.put("@@YEAR@@", Integer.toString(base.year));
 		map.put("@@MONTH@@", Integer.toString(base.month));
@@ -53,11 +55,17 @@ public abstract class AbstractTemplate implements Template {
 		String string = fragment.html;
 
 		if (string == null) {
-			throw new Exception("the html fiels is null for the fragment: " + fragment.toString());
+			throw new Exception("the html fields is null for the fragment: " + fragment.toString());
 		}
 
 		for (String tag : map.keySet()) {
-			string = string.replaceAll(tag, map.get(tag));
+			String replacement = map.get(tag);
+
+			if (replacement == null) {
+				throw new Exception("the replacement string is null: tag:" + tag + ", base: " + base);
+			}
+
+			string = string.replaceAll(tag, replacement);
 		}
 		fragment.html = string;
 		return fragment;
