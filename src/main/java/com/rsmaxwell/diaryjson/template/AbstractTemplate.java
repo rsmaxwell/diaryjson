@@ -55,10 +55,9 @@ public abstract class AbstractTemplate implements Template {
 		fragment.day = base.day;
 		fragment.check();
 
-		String string = fragment.html;
-
-		if (string == null) {
-			throw new Exception("the html fields is null for the fragment: " + fragment.toString());
+		String html = fragment.html;
+		if (html == null) {
+			throw new Exception("the html field is null for the fragment: " + fragment.toString());
 		}
 
 		for (String tag : map.keySet()) {
@@ -68,9 +67,9 @@ public abstract class AbstractTemplate implements Template {
 				throw new Exception("the replacement string is null: tag:" + tag + ", base: " + base);
 			}
 
-			string = string.replaceAll(tag, replacement);
+			html = html.replaceAll(tag, replacement);
 		}
-		fragment.html = string;
+		fragment.html = html;
 		return fragment;
 	}
 
