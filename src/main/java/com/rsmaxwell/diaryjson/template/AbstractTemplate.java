@@ -29,6 +29,9 @@ public abstract class AbstractTemplate implements Template {
 
 		Map<String, String> map = new HashMap<String, String>();
 
+		String id = String.format("%04d-%02d-%02d", base.year, base.month, base.day);
+		map.put("@@ID@@", id);
+
 		if (base.imageFilename != null) {
 			map.put("@@PAGE_LINK@@", base.imageFilename);
 		}
