@@ -53,6 +53,7 @@ public abstract class AbstractTemplate implements Template {
 		fragment.year = base.year;
 		fragment.month = base.month;
 		fragment.day = base.day;
+		fragment.imageFilename = base.imageFilename;
 		fragment.check();
 
 		String html = fragment.html;
