@@ -4,9 +4,12 @@ import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rsmaxwell.diaryjson.fragment.DateBody;
+import com.rsmaxwell.diaryjson.fragment.DateKey;
+import com.rsmaxwell.diaryjson.fragment.Fragment;
+import com.rsmaxwell.diaryjson.template.FragmentList;
 import com.rsmaxwell.diaryjson.template.Template;
 import com.rsmaxwell.diaryjson.template.TemplateInfo;
 
@@ -31,43 +34,29 @@ public class Templates {
 		}
 	}
 
-	public void addGeneratedFragments(TreeMap<Key, Fragment> mapOfFragments) throws Exception {
+	public void addGeneratedFragments(FragmentList fragments) throws Exception {
 
 		List<Fragment> listOfNewFragments = new ArrayList<Fragment>();
 
-		Fragment previousFragment = null;
-		for (Key key : mapOfFragments.keySet()) {
-			Fragment fragment = mapOfFragments.get(key);
-			add(previousFragment, fragment, listOfNewFragments);
-			previousFragment = fragment;
-		}
-		add(previousFragment, null, listOfNewFragments);
+		fragments.addGeneratedFragments(listOfNewFragments, this);
 
 		for (Fragment fragment : listOfNewFragments) {
-			Key key = new Key(fragment.year, fragment.month, fragment.day, fragment.order);
-
-			Fragment original = mapOfFragments.get(key);
-			if (original != null) {
-				System.out.println("Duplicate fragment:");
-				System.out.println("    discarding: " + fragment.toString());
-				System.out.println("    keeping :   " + original.toString());
-			} else {
-				mapOfFragments.put(key, fragment);
-			}
+			fragments.add(fragment);
 		}
 	}
 
 	private Template NewTemplate(String templatesDirName, String templateName) throws Exception {
 
-		String templateJsonFilename = templatesDirName + "/" + templateName + "/template.json";
+		String fragmentDirName = templatesDirName + "/" + templateName;
+		String templateJsonFilename = fragmentDirName + "/template.json";
 
 		try {
 
-			TemplateInfo info = objectMapper.readValue(templateJsonFilename, TemplateInfo.class);
+			TemplateInfo info = objectMapper.readValue(new File(templateJsonFilename), TemplateInfo.class);
 
 			Class<?> clazz = Class.forName(info.classname);
-			Constructor<?> ctor = clazz.getConstructor(File.class);
-			Object object = ctor.newInstance(new Object[] { templateName });
+			Constructor<?> ctor = clazz.getConstructor(String.class);
+			Object object = ctor.newInstance(new Object[] { fragmentDirName });
 
 			if (!Template.class.isInstance(object)) {
 				throw new Exception("The template [" + templateJsonFilename + "] class [" + info.classname + "] does not implement ["
@@ -81,9 +70,11 @@ public class Templates {
 		}
 	}
 
-	private void add(Fragment previousFragment, Fragment fragment, List<Fragment> listOfNewFragments) throws Exception {
+	public void add(DateKey previousDateKey, DateBody previousDateBody, DateKey dateKey, DateBody dateBody, List<Fragment> listOfNewFragments)
+			throws Exception {
+
 		for (Template template : templates) {
-			template.add(previousFragment, fragment, listOfNewFragments);
+			template.add(previousDateKey, previousDateBody, dateKey, dateBody, listOfNewFragments);
 		}
 	}
 }

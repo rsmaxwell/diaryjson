@@ -1,21 +1,24 @@
 package com.rsmaxwell.diaryjson.template;
 
-import java.io.File;
 import java.util.List;
 
-import com.rsmaxwell.diaryjson.Fragment;
+import com.rsmaxwell.diaryjson.fragment.DateBody;
+import com.rsmaxwell.diaryjson.fragment.DateKey;
+import com.rsmaxwell.diaryjson.fragment.Fragment;
 
 public class YearFooter extends AbstractTemplate {
 
-	public YearFooter(File dir) {
-		super(dir);
+	public YearFooter(String fragmentDirName) {
+		super(fragmentDirName);
 	}
 
 	@Override
-	public void add(Fragment previousFragment, Fragment fragment, List<Fragment> listOfNewFragments) throws Exception {
-		if (previousFragment != null) {
-			if ((fragment == null) || (previousFragment.year != fragment.year)) {
-				listOfNewFragments.add(get(previousFragment));
+	public void add(DateKey previousDateKey, DateBody previousDateBody, DateKey dateKey, DateBody dateBody, List<Fragment> listOfNewFragments)
+			throws Exception {
+
+		if (previousDateKey != null) {
+			if ((dateKey == null) || (previousDateKey.year != dateKey.year)) {
+				listOfNewFragments.add(get(previousDateKey, previousDateBody));
 			}
 		}
 	}

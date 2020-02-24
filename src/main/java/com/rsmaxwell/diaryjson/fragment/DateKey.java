@@ -1,22 +1,20 @@
-package com.rsmaxwell.diaryjson;
+package com.rsmaxwell.diaryjson.fragment;
 
-public class Key implements Comparable {
+public class DateKey implements Comparable {
 
 	public int year;
 	public int month;
 	public int day;
-	public String order;
 
-	public Key(int year, int month, int day, String order) {
+	public DateKey(int year, int month, int day) {
 		this.year = year;
 		this.month = month;
 		this.day = day;
-		this.order = order;
 	}
 
 	@Override
 	public int compareTo(Object o) {
-		Key other = (Key) o;
+		DateKey other = (DateKey) o;
 		if (year != other.year) {
 			return year - other.year;
 		}
@@ -26,6 +24,6 @@ public class Key implements Comparable {
 		if (day != other.day) {
 			return day - other.day;
 		}
-		return order.compareTo(other.order);
+		return 0;
 	}
 }

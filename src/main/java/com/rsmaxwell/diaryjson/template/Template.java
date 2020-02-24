@@ -2,9 +2,12 @@ package com.rsmaxwell.diaryjson.template;
 
 import java.util.List;
 
-import com.rsmaxwell.diaryjson.Fragment;
+import com.rsmaxwell.diaryjson.fragment.DateBody;
+import com.rsmaxwell.diaryjson.fragment.DateKey;
+import com.rsmaxwell.diaryjson.fragment.Fragment;
 
 public interface Template {
 
-	void add(Fragment previousFragmenty, Fragment fragment, List<Fragment> listOfNewFragments) throws Exception;
+	void add(DateKey previousDateKey, DateBody previousDateBody, DateKey dateKey, DateBody dateBody, List<Fragment> listOfNewFragments)
+			throws Exception;
 }

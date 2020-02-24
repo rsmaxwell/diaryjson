@@ -1,4 +1,4 @@
-package com.rsmaxwell.diaryjson;
+package com.rsmaxwell.diaryjson.fragment;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,10 +35,11 @@ public class Fragment implements Comparable, Cloneable {
 	public Fragment() {
 	}
 
-	public static Fragment readFromFile(File dir) throws JsonParseException, JsonMappingException, IOException {
-		Fragment fragment = objectMapper.readValue(new File(dir, "fragment.json"), Fragment.class);
-		fragment.html = new String(Files.readAllBytes(new File(dir, "fragment.html").toPath()));
-		fragment.wordFilename = dir.getCanonicalPath();
+	public static Fragment readFromFile(String fragmentDirName) throws JsonParseException, JsonMappingException, IOException {
+
+		Fragment fragment = objectMapper.readValue(new File(fragmentDirName + "/fragment.json"), Fragment.class);
+		fragment.html = new String(Files.readAllBytes(new File(fragmentDirName, "fragment.html").toPath()));
+		fragment.wordFilename = fragmentDirName;
 		return fragment;
 	}
 
