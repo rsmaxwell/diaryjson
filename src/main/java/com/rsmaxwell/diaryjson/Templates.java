@@ -20,13 +20,14 @@ public class Templates {
 		objectMapper = new ObjectMapper();
 	}
 
-	public Templates(File templateDir) throws Exception {
-		for (File dir : templateDir.listFiles()) {
-			templates.add(NewTemplate(dir));
+	public Templates(String templatesDirName) throws Exception {
+		File templatesDir = new File(templatesDirName);
+		for (String name : templatesDir.list()) {
+			templates.add(NewTemplate(templatesDirName, name));
 		}
 
 		if (templates.size() == 0) {
-			throw new Exception("No templates found in: " + templateDir.getCanonicalPath());
+			throw new Exception("No templates found in: " + templatesDirName);
 		}
 	}
 
@@ -56,23 +57,27 @@ public class Templates {
 		}
 	}
 
-	private Template NewTemplate(File dir) throws Exception {
+	private Template NewTemplate(String templatesDirName, String templateName) throws Exception {
+
+		String templateJsonFilename = templatesDirName + "/" + templateName + "/template.json";
+
 		try {
-			TemplateInfo info = objectMapper.readValue(new File(dir, "template.json"), TemplateInfo.class);
+
+			TemplateInfo info = objectMapper.readValue(templateJsonFilename, TemplateInfo.class);
 
 			Class<?> clazz = Class.forName(info.classname);
 			Constructor<?> ctor = clazz.getConstructor(File.class);
-			Object object = ctor.newInstance(new Object[] { dir });
+			Object object = ctor.newInstance(new Object[] { templateName });
 
 			if (!Template.class.isInstance(object)) {
-				throw new Exception("The template [" + dir.getCanonicalPath() + "] class [" + info.classname + "] does not implement ["
+				throw new Exception("The template [" + templateJsonFilename + "] class [" + info.classname + "] does not implement ["
 						+ Template.class.getName() + "]");
 			}
 
 			return (Template) object;
 
 		} catch (Exception e) {
-			throw new Exception(dir.getCanonicalPath(), e);
+			throw new Exception(templateJsonFilename, e);
 		}
 	}
 

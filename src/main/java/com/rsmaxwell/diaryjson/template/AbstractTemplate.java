@@ -49,7 +49,7 @@ public abstract class AbstractTemplate implements Template {
 		map.put("@@GIT_BRANCH@@", getenv("GIT_BRANCH", "snapshot"));
 		map.put("@@GIT_URL@@", getenv("GIT_URL", "snapshot"));
 
-		Fragment fragment = Fragment.MakeFragment(dir);
+		Fragment fragment = Fragment.readFromFile(dir);
 		fragment.year = base.year;
 		fragment.month = base.month;
 		fragment.day = base.day;

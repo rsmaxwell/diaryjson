@@ -35,7 +35,7 @@ public class Fragment implements Comparable, Cloneable {
 	public Fragment() {
 	}
 
-	public static Fragment MakeFragment(File dir) throws JsonParseException, JsonMappingException, IOException {
+	public static Fragment readFromFile(File dir) throws JsonParseException, JsonMappingException, IOException {
 		Fragment fragment = objectMapper.readValue(new File(dir, "fragment.json"), Fragment.class);
 		fragment.html = new String(Files.readAllBytes(new File(dir, "fragment.html").toPath()));
 		fragment.wordFilename = dir.getCanonicalPath();
