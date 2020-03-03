@@ -17,6 +17,7 @@ public abstract class AbstractTemplate implements Template {
 	private String fragmentDirName;
 
 	public AbstractTemplate(String url, String fragmentDirName) {
+		this.url = url;
 		this.fragmentDirName = fragmentDirName;
 	}
 
