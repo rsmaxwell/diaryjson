@@ -24,6 +24,7 @@ public class Fragment implements Comparable, Cloneable {
 
 	public String wordFilename;
 	public String imageFilename;
+	public String diary;
 
 	@JsonIgnore
 	private static ObjectMapper objectMapper;

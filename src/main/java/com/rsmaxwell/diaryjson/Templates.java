@@ -23,10 +23,10 @@ public class Templates {
 		objectMapper = new ObjectMapper();
 	}
 
-	public Templates(String templatesDirName) throws Exception {
+	public Templates(String url, String templatesDirName) throws Exception {
 		File templatesDir = new File(templatesDirName);
 		for (String name : templatesDir.list()) {
-			templates.add(NewTemplate(templatesDirName, name));
+			templates.add(NewTemplate(url, templatesDirName, name));
 		}
 
 		if (templates.size() == 0) {
@@ -45,7 +45,7 @@ public class Templates {
 		}
 	}
 
-	private Template NewTemplate(String templatesDirName, String templateName) throws Exception {
+	private Template NewTemplate(String url, String templatesDirName, String templateName) throws Exception {
 
 		String fragmentDirName = templatesDirName + "/" + templateName;
 		String templateJsonFilename = fragmentDirName + "/template.json";
@@ -55,8 +55,8 @@ public class Templates {
 			TemplateInfo info = objectMapper.readValue(new File(templateJsonFilename), TemplateInfo.class);
 
 			Class<?> clazz = Class.forName(info.classname);
-			Constructor<?> ctor = clazz.getConstructor(String.class);
-			Object object = ctor.newInstance(new Object[] { fragmentDirName });
+			Constructor<?> ctor = clazz.getConstructor(String.class, String.class);
+			Object object = ctor.newInstance(new Object[] { url, fragmentDirName });
 
 			if (!Template.class.isInstance(object)) {
 				throw new Exception("The template [" + templateJsonFilename + "] class [" + info.classname + "] does not implement ["

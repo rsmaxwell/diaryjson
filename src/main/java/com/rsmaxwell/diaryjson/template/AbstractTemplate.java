@@ -4,7 +4,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import com.rsmaxwell.diaryjson.Day;
 import com.rsmaxwell.diaryjson.Month;
@@ -14,12 +13,10 @@ import com.rsmaxwell.diaryjson.fragment.Fragment;
 
 public abstract class AbstractTemplate implements Template {
 
+	private String url;
 	private String fragmentDirName;
 
-	private static String sourcePatternString = "([\\d]{4})-([\\d]{2})-([\\d]{2})-(img[\\d]{4})-.*";
-	private static Pattern sourcePattern = Pattern.compile(sourcePatternString);
-
-	public AbstractTemplate(String fragmentDirName) {
+	public AbstractTemplate(String url, String fragmentDirName) {
 		this.fragmentDirName = fragmentDirName;
 	}
 
@@ -33,8 +30,12 @@ public abstract class AbstractTemplate implements Template {
 		String id = String.format("%04d-%02d-%02d", key.year, key.month, key.day);
 		map.put("@@ID@@", id);
 
-		if (body.imageFilename != null) {
-			map.put("@@PAGE_LINK@@", body.imageFilename);
+		if (body.diary != null) {
+			if (body.imageFilename != null) {
+				String parmeters = "?diary=" + body.diary + "&image=" + body.imageFilename;
+				String link = url + parmeters;
+				map.put("@@PAGE_LINK@@", link);
+			}
 		}
 
 		map.put("@@YEAR@@", Integer.toString(key.year));

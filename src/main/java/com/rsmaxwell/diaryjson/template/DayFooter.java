@@ -8,8 +8,8 @@ import com.rsmaxwell.diaryjson.fragment.Fragment;
 
 public class DayFooter extends AbstractTemplate {
 
-	public DayFooter(String fragmentDirName) {
-		super(fragmentDirName);
+	public DayFooter(String url, String fragmentDirName) {
+		super(url, fragmentDirName);
 	}
 
 	@Override

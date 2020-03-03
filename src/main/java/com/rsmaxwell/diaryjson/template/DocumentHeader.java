@@ -8,8 +8,8 @@ import com.rsmaxwell.diaryjson.fragment.Fragment;
 
 public class DocumentHeader extends AbstractTemplate {
 
-	public DocumentHeader(String fragmentDirName) {
-		super(fragmentDirName);
+	public DocumentHeader(String url, String fragmentDirName) {
+		super(url, fragmentDirName);
 	}
 
 	@Override

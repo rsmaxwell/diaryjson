@@ -8,8 +8,8 @@ import com.rsmaxwell.diaryjson.fragment.Fragment;
 
 public class YearFooter extends AbstractTemplate {
 
-	public YearFooter(String fragmentDirName) {
-		super(fragmentDirName);
+	public YearFooter(String url, String fragmentDirName) {
+		super(url, fragmentDirName);
 	}
 
 	@Override
