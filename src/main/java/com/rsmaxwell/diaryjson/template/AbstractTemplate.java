@@ -55,6 +55,7 @@ public abstract class AbstractTemplate implements Template {
 		fragment.year = key.year;
 		fragment.month = key.month;
 		fragment.day = key.day;
+		fragment.diary = body.diary;
 		fragment.imageFilename = body.imageFilename;
 		fragment.check();
 
