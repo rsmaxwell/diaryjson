@@ -88,7 +88,7 @@ public class Fragment implements Comparable, Cloneable {
 	}
 
 	public String toDirectoryName() {
-		return String.format("%04d-%02d-%02d-%s", year, month, day, order);
+		return String.format("%04d/%02d/%02d-%s", year, month, day, order);
 	}
 
 	@Override

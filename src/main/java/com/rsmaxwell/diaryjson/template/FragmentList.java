@@ -55,7 +55,7 @@ public class FragmentList {
 		}
 	}
 
-	public void generateHtmlAndPdfDocuments(String baseUriName, String pdfDirName, DiaryOutput output) throws IOException {
+	public void generateHtmlDocuments(String baseUriName, String pdfDirName, DiaryOutput output) throws IOException {
 
 		StringBuilder html = new StringBuilder();
 		DateKey previousDateKey = new DateKey(0, 0, 0);
