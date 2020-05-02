@@ -17,15 +17,13 @@ public class DateBody {
 		this.diary = diary;
 	}
 
-	public void add(Fragment fragment) {
+	public void add(Fragment fragment, DateKey dateKey) {
 		FragmentKey key = new FragmentKey(fragment.order);
 		FragmentBody body = new FragmentBody(fragment.html);
 
 		FragmentBody original = fragments.get(key);
 		if (original != null) {
-			System.out.println("Duplicate FragmentKey: " + key);
-			System.out.println("    discarding: " + body);
-			System.out.println("    keeping :   " + original);
+			System.out.println("Duplicate FragmentKey: " + dateKey + " : " + key);
 		} else {
 			fragments.put(key, body);
 		}

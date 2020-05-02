@@ -37,7 +37,7 @@ public class FragmentList {
 			body.imageFilename = fragment.imageFilename;
 		}
 
-		body.add(fragment);
+		body.add(fragment, key);
 	}
 
 	public void addGeneratedFragments(List<Fragment> listOfNewFragments, Templates templates) throws Exception {
@@ -55,7 +55,7 @@ public class FragmentList {
 		}
 	}
 
-	public void generateHtmlDocuments(String baseUriName, String pdfDirName, DiaryOutput output) throws IOException {
+	public void generateHtmlDocuments(String baseUriName, DiaryOutput output) throws IOException {
 
 		StringBuilder html = new StringBuilder();
 		DateKey previousDateKey = new DateKey(0, 0, 0);

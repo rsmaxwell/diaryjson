@@ -13,4 +13,9 @@ public class FragmentKey implements Comparable {
 		FragmentKey other = (FragmentKey) o;
 		return order.compareTo(other.order);
 	}
+
+	@Override
+	public String toString() {
+		return order;
+	}
 }
