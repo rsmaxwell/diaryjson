@@ -16,15 +16,15 @@ public class Fragment implements Comparable, Cloneable {
 	public int day;
 	public String order;
 
+	public String imageFilename;
+	public String diary;
+	public String[] images = {};
+
 	@JsonIgnore
 	public String html;
 
 	@JsonIgnore
 	public String notes;
-
-	public String imageFilename;
-	public String diary;
-	public String[] images = {};
 
 	@JsonIgnore
 	private static ObjectMapper objectMapper;
