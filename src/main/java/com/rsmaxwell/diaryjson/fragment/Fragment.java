@@ -22,10 +22,10 @@ public class Fragment implements Comparable, Cloneable {
 	@JsonIgnore
 	public String notes;
 
-	public String wordFilename;
+	// public String wordFilename;
 	public String imageFilename;
 	public String diary;
-	public String[] images;
+	public String[] images = {};
 
 	@JsonIgnore
 	private static ObjectMapper objectMapper;
@@ -41,7 +41,6 @@ public class Fragment implements Comparable, Cloneable {
 
 		Fragment fragment = objectMapper.readValue(new File(fragmentDirName + "/fragment.json"), Fragment.class);
 		fragment.html = new String(Files.readAllBytes(new File(fragmentDirName, "fragment.html").toPath()));
-		fragment.wordFilename = fragmentDirName;
 		return fragment;
 	}
 
@@ -94,7 +93,7 @@ public class Fragment implements Comparable, Cloneable {
 
 	@Override
 	public String toString() {
-		return String.format("%04d-%02d-%02d-%s %s", year, month, day, order, wordFilename);
+		return String.format("%04d-%02d-%02d-%s", year, month, day, order);
 	}
 
 	@Override
