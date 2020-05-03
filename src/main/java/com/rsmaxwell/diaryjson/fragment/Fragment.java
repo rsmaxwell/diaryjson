@@ -22,7 +22,6 @@ public class Fragment implements Comparable, Cloneable {
 	@JsonIgnore
 	public String notes;
 
-	// public String wordFilename;
 	public String imageFilename;
 	public String diary;
 	public String[] images = {};
