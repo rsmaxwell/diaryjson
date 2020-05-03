@@ -21,12 +21,8 @@ public class FragmentList {
 
 		DateBody body = dates.get(key);
 		if (body == null) {
-			body = new DateBody(fragment.order, fragment.wordFilename, fragment.diary, fragment.imageFilename);
+			body = new DateBody(fragment.order, fragment.diary, fragment.imageFilename);
 			dates.put(key, body);
-		}
-
-		if (body.wordFilename == null) {
-			body.wordFilename = fragment.wordFilename;
 		}
 
 		if (body.diary == null) {

@@ -5,14 +5,12 @@ import java.util.TreeMap;
 public class DateBody {
 
 	public String order;
-	public String wordFilename;
 	public String diary;
 	public String imageFilename;
 	public TreeMap<FragmentKey, FragmentBody> fragments = new TreeMap<FragmentKey, FragmentBody>();
 
-	public DateBody(String order, String wordFilename, String diary, String imageFilename) {
+	public DateBody(String order, String diary, String imageFilename) {
 		this.order = order;
-		this.wordFilename = wordFilename;
 		this.imageFilename = imageFilename;
 		this.diary = diary;
 	}
