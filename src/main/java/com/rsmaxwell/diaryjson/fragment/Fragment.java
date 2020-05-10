@@ -26,7 +26,6 @@ public class Fragment implements Comparable, Cloneable {
 	@JsonIgnore
 	public String notes;
 
-	// @JsonIgnore
 	private static ObjectMapper objectMapper;
 
 	static {
