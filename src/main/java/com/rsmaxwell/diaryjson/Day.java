@@ -19,7 +19,7 @@ public class Day {
 			sb.append(day);
 			separator = "|";
 		}
-		String regx = "^(" + sb.toString() + ")\\s+(.*)";
+		String regx = "^(" + sb.toString() + ")(.*)";
 		pattern = Pattern.compile(regx, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 	}
 
